@@ -1,31 +1,31 @@
 pipeline {
     agent any
 
-    stage {
+    stages {
         stage("build") {
-            step {
+            steps {
                 echo 'building the application'
             }
         }
     }
 
-    stage {
+    stages {
         stage("test") {
             when{
                 expression{
                     BRANCH_NAME == 'dev' ||  BRANCH_NAME == 'master'
                 }
             }
-            step{
+            steps {
                 echo 'testing the application'
         }
     }
 
     }
 
-    stage {
+    stages {
         stage("deploy") {
-            step{
+            steps {
                 echo 'deploying the application'
             }
         }
