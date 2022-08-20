@@ -1,5 +1,6 @@
 pipieline {
     agent any
+
     stage {
         stage("build") {
             step {
@@ -10,8 +11,13 @@ pipieline {
 
     stage {
         stage("test") {
+            when{
+                expression{
+                    BRANCH_NAME == 'dev' ||  BRANCH_NAME == 'master'
+                }
+            }
             step{
-                echo 'testign the application'
+                echo 'testing the application'
         }
     }
 
@@ -23,5 +29,10 @@ pipieline {
                 echo 'deploying the application'
             }
         }
+    }
+    post {
+        always {
+            echo 'hello world'        }
+        
     }
 }
